@@ -3,12 +3,10 @@ import { useHistory } from "react-router-dom";
 import { Button, Input, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { useDispatch } from "react-redux";
 
 import "./styles.scss";
 import http from "../../utils/http";
 import formatFilters from "../../constants/formatFilters";
-import { changeComic } from "../../actions";
 
 const Comics = () => {
   const [comics, setComics] = useState([]);
@@ -18,7 +16,6 @@ const Comics = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   const history = useHistory();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getComics(1);
@@ -156,7 +153,6 @@ const Comics = () => {
         onRow={(record) => {
           return {
             onClick: () => {
-              dispatch(changeComic(record));
               history.push(`/comics/${record.id}`);
             },
           };
@@ -206,6 +202,8 @@ const Comics = () => {
           key="issue-number"
           align="center"
           width={200}
+          sorter={(a, b) => a.issueNumber - b.issueNumber}
+          sortDirections={["descend", "ascend"]}
           {...getColumnSearchProps("issueNumber")}
         />
       </Table>

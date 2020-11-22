@@ -2,20 +2,18 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Home from "../containers/Home";
-import Stories from "../containers/Stories";
+import StoriesNavigation from "./StoriesNavigation";
 import NoMatch from "../containers/NoMatch";
 import ComicsNavigation from "./ComicsNavigation";
 import CharactersNavigation from "./CharactersNavigation";
 
-const HomeNavigation = () => {
+const MainNavigation = () => {
   return (
     <Switch>
       <Route path="/comics" component={ComicsNavigation} />
       <Route path="/characters" component={CharactersNavigation} />
-      <Route path="/stories">
-        <Stories />
-      </Route>
-      <Route path="/">
+      <Route path="/stories" component={StoriesNavigation} />
+      <Route exact path="/">
         <Home />
       </Route>
       <Route>
@@ -25,4 +23,4 @@ const HomeNavigation = () => {
   );
 };
 
-export default HomeNavigation;
+export default MainNavigation;

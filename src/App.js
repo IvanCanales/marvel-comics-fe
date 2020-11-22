@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import store from "./store";
-import HomeNavigation from "./navigation/HomeNavigation";
+import MainNavigation from "./navigation/MainNavigation";
 import DefaultLayout from "./layouts/default";
 import "./App.scss";
 
@@ -12,7 +12,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <DefaultLayout>
-          <HomeNavigation />
+          <MainNavigation />
         </DefaultLayout>
       </Router>
     </Provider>

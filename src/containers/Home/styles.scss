@@ -1,0 +1,21 @@
+.home-page {
+  padding: 1rem;
+
+  .title {
+    font-size: 21px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+  .ant-divider {
+    margin-top: 5px;
+  }
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .ant-card {
+      height: 620px;
+      margin: 2rem;
+    }
+  }
+}

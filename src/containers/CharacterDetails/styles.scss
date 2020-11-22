@@ -1,8 +1,8 @@
-.comic-detail-page {
+.character-detail-page {
   margin-top: 1.5rem;
   padding: 1rem;
   background: white;
-  .comic-name {
+  .character-name {
     font-size: 22px;
     font-weight: 700;
     color: #a8071a;
@@ -28,13 +28,13 @@
       @media (max-width: 1024px) {
         width: 25%;
       }
-      .comic-thumbnail {
+      .character-thumbnail {
         display: flex;
         margin: 0 auto;
         box-shadow: -5px 26px 23px -17px rgba(0, 0, 0, 0.44);
       }
       .info {
-        margin-top: 2rem;
+        margin-top: 1rem;
         .info-row {
           .label {
             font-size: 14px;

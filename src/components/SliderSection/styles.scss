@@ -1,9 +1,23 @@
 .slider-section {
-  .gallery-wrapper {
-    display: flex;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    justify-content: center;
+  .gallery-slide {
+    text-align: center;
+    img {
+      border: 2px solid transparent;
+    }
+    .item-content.clickable:hover {
+      cursor: pointer;
+      img {
+        border: 2px solid #a8071a;
+      }
+      .description {
+        color: #a8071a;
+      }
+    }
+    .description {
+      font-size: 18px;
+      text-align: center;
+      font-weight: 700;
+      margin-top: 10px;
+    }
   }
 }

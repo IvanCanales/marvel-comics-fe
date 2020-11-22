@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Input, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import Highlighter from "react-highlight-words";
 
 import "./styles.scss";
 import http from "../../utils/http";
-import { changeCharacter } from "../../actions";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
   const [numCharacters, setNumCharacters] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
+  const searchInput = useRef(null);
   const history = useHistory();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getCharacters(1);
@@ -41,6 +42,7 @@ const Characters = () => {
     setNumCharacters(data.total * 20);
     setLoading(false);
   };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -50,6 +52,7 @@ const Characters = () => {
     }) => (
       <div style={{ padding: 8 }}>
         <Input
+          ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={(e) =>
@@ -88,14 +91,36 @@ const Characters = () => {
             .toLowerCase()
             .includes(value.toLowerCase())
         : "",
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(() => {
+          searchInput.current.select();
+        }, 100);
+      }
+    },
+    render: (text) =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ""}
+        />
+      ) : (
+        text
+      ),
   });
+
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
   };
 
   const handleReset = (clearFilters) => {
     clearFilters();
   };
+
   const onTableChange = (pagination, filters, _s, { action }) => {
     const characterFilters = {};
     if (filters.name) characterFilters.name = filters.name[0];
@@ -125,7 +150,6 @@ const Characters = () => {
         onRow={(record) => {
           return {
             onClick: () => {
-              dispatch(changeCharacter(record));
               history.push(`/characters/${record.id}`);
             },
           };
@@ -153,6 +177,8 @@ const Characters = () => {
           dataIndex="name"
           key="name"
           width={140}
+          sorter={(a, b) => a.name > b.name}
+          sortDirections={["descend", "ascend"]}
           {...getColumnSearchProps("name")}
         />
         <Table.Column

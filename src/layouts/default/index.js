@@ -9,7 +9,7 @@ const DefaultLayout = (props) => {
   const { Header, Content, Footer } = Layout;
   const location = useLocation();
   const path = location.pathname;
-  const routes = path.slice(1, path.length).split("/");
+  const routes = path.replace(/\/$/, "").slice(1, path.length).split("/");
 
   return (
     <Layout className="layout">

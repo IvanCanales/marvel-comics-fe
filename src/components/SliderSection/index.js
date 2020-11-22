@@ -1,10 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Divider } from "antd";
 
 import "./styles.scss";
 
-const SliderSection = ({ images }) => {
+const SliderSection = ({ items = [], clickable = false }) => {
   return (
     <div className="slider-section">
       <Swiper
@@ -30,13 +30,19 @@ const SliderSection = ({ images }) => {
           },
         }}
       >
-        {images.map((image, i) => {
+        {items.map((item, i) => {
           return (
-            <SwiperSlide key={`slide-${i}`} className="gallery-slide">
-              <img
-                src={`${image.path}/portrait_xlarge.${image.extension}`}
-                alt="slide"
-              />
+            <SwiperSlide key={`slide-${i}`} className={`gallery-slide`}>
+              <Link
+                className={`item-content ${clickable && "clickable"}`}
+                to={item.link}
+              >
+                <img
+                  src={`${item.thumbnail.path}/portrait_xlarge.${item.thumbnail.extension}`}
+                  alt="slide"
+                />
+                <p className="description">{item.description || ""}</p>
+              </Link>
             </SwiperSlide>
           );
         })}
