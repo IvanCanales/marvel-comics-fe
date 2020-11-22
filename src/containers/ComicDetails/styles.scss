@@ -1,0 +1,60 @@
+.comic-detail {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: white;
+  .comic-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #a8071a;
+  }
+  .content {
+    display: flex;
+    .section-title,
+    .ant-collapse > .ant-collapse-item .ant-collapse-header {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      .ant-collapse-arrow {
+        font-size: 20px;
+        top: 12px;
+      }
+    }
+    .section-divider {
+      margin: 5px 0 10px;
+    }
+    .sider {
+      width: 17%;
+      padding-right: 15px;
+      @media (max-width: 1024px) {
+        width: 25%;
+      }
+      .comic-thumbnail {
+        display: flex;
+        margin: 0 auto;
+      }
+      .info {
+        margin-top: 1rem;
+        .info-row {
+          .label {
+            font-size: 14px;
+            font-weight: 500;
+          }
+          .value {
+            margin-left: 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .main-content {
+      width: 83%;
+      padding-left: 15px;
+      @media (max-width: 1024px) {
+        width: 75%;
+      }
+      .section {
+        margin-top: 2rem;
+      }
+    }
+  }
+}

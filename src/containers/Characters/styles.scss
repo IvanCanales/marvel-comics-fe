@@ -1,0 +1,11 @@
+.characters-page {
+  margin-top: 1.5rem;
+  .ant-table-tbody {
+    .ant-table-row {
+      cursor: pointer;
+    }
+    td {
+      padding: 8px 16px;
+    }
+  }
+}
